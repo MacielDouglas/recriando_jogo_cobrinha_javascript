@@ -7,6 +7,11 @@ snake[0] = { //array
     y: 8 *box
 }
 let direction = "rigth";
+let food = { //criar a comida em varios lugares
+    x: Math.floor(Math.random() * 15 + 1) * box,
+    y: Math.floor(Math.random() * 15 + 1) * box
+
+}
 
 
 function criarBG() {
@@ -21,6 +26,12 @@ function criarCobra() {
         context.fillRect(snake[i].x, snake[i].y, box, box);
         
     }
+}
+
+function drawFood() { //criar comida
+    context.fillStyle = "red";
+    context.fillRect(food.x, food.y, box, box);
+    
 }
 
 //comando para reconhecer movimentos do teclado
@@ -48,15 +59,16 @@ function iniciarJogo() {
 
     criarBG();
     criarCobra();
-   let snakeX = cobra[0].x; //posicao x, y movimentos cobra
-   let snakeY = cobra[0].y; 
+    drawFood();
+   let snakeX = snake[0].x; //posicao x, y movimentos cobra
+   let snakeY = snake[0].y; 
    //condicionais para posição dos quadrados de movimento
    if(direction == "rigth") snakeX += box;
    if(direction == "left") snakeX-= box;
    if(direction == "up") snakeY -= box;
    if(direction == "down") snakeY += box;
 
-   cobra.pop();
+   snake.pop();
 
    let newhead = { //criar uma nova cabeça, onde acrecenta um novo elemento a frente.
        x: snakeX,
