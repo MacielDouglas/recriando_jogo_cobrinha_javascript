@@ -57,8 +57,8 @@ function iniciarJogo() {
     if(snake[0].y < 0 && direction == "up") snake[0].y =16 * box;
 
 
-    criarBG();
-    criarCobra();
+    criarBG(); //chamr funçao
+    criarCobra(); 
     drawFood();
    let snakeX = snake[0].x; //posicao x, y movimentos cobra
    let snakeY = snake[0].y; 
@@ -68,7 +68,15 @@ function iniciarJogo() {
    if(direction == "up") snakeY -= box;
    if(direction == "down") snakeY += box;
 
-   snake.pop();
+   if (snakeX != food.x || snakeY != food.y) {
+       snake.pop(); //reiniciar novamente quando ela comer
+   }
+       else {food.x = Math.floor(Math.random() * 15 + 1) * box; //recebe posição aleatoria
+            food.y = Math.floor(Math.random() * 15 + 1) * box; // recebe posicao aleatoria
+
+       }
+
+   //snake.pop();
 
    let newhead = { //criar uma nova cabeça, onde acrecenta um novo elemento a frente.
        x: snakeX,
