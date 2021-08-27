@@ -23,22 +23,44 @@ function criarCobra() {
     }
 }
 
+//comando para reconhecer movimentos do teclado
+document.addEventListener('keydown', update);
+
+function update(event) { //evitar que a cobra nao bata nela mesma
+    if (event.keyCode == 37 && direction != "rigth") direction = "left"; //se a direção não for right ela vai para left
+    if (event.keyCode == 38 && direction != "down") direction = "up";
+    if (event.keyCode == 39 && direction != "left") direction = "rigth";
+    if (event.keyCode == 40 && direction != "up") direction = "down";
+     {
+        
+        
+    }
+    
+}
+
+
 function iniciarJogo() {
+    if(snake[0].x > 15 * box && direction == "rigth") snake[0].x = 0; //comando para ela não ultrapassar tela
+    if(snake[0].x < 0 && direction == "left") snake[0].x = 16 * box;
+    if(snake[0].y > 15 * box && direction == "down") snake[0] .y = 0;
+    if(snake[0].y < 0 && direction == "up") snake[0].y =16 * box;
+
+
     criarBG();
     criarCobra();
-   let cobrax = snake[0].x; //posicao x, y movimentos cobra
-   let cobray = snake[0].y; 
+   let snakeX = cobra[0].x; //posicao x, y movimentos cobra
+   let snakeY = cobra[0].y; 
    //condicionais para posição dos quadrados de movimento
-   if(direction == "rigth") snakex += box;
-   if(direction == "left") snakex -= box;
-   if(direction == "up") snakey -= box;
-   if(direction == "down") snakey += box;
+   if(direction == "rigth") snakeX += box;
+   if(direction == "left") snakeX-= box;
+   if(direction == "up") snakeY -= box;
+   if(direction == "down") snakeY += box;
 
-   snake.pop();
+   cobra.pop();
 
    let newhead = { //criar uma nova cabeça, onde acrecenta um novo elemento a frente.
-       x: snakex,
-       y: snakey
+       x: snakeX,
+       y: snakeY
    }
 
    snake.unshift(newhead);
